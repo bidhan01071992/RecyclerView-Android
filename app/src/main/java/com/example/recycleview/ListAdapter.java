@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,11 +62,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         TextView textViewHead;
         TextView textViewDesc;
+        ImageView profileImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewHead = (TextView) itemView.findViewById(R.id.heading);
             textViewDesc = (TextView) itemView.findViewById(R.id.textViewDescription);
+            profileImage = (ImageView) itemView.findViewById(R.id.profileImage);
         }
     }
 }
