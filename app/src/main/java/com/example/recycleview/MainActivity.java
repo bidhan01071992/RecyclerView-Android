@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -48,16 +49,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Initializing ArrayList
         listItems = new ArrayList<>();
-
-
-//        for (int i = 0; i<14000; i++) {
-//            ListItem listItem = new ListItem("","Heading" + i,"Description" + i+1);
-//            listItems.add(listItem);
-//        }
-//
-//        adapter = new ListAdapter(listItems, this);
-//        recyclerView.setAdapter(adapter);
         loadRecyclerViewData();
+
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadRecyclerViewData();
+                //For an ArrayAdapter, notifyDataSetChanged only works if you use the add(), insert(), remove(), and clear() on the Adapter.
+                adapter.notifyDataSetChanged();
+                //Pause the refresh indicator
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void loadRecyclerViewData() {

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -48,6 +50,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         holder.textViewHead.setText(listItem.getHeading());
         holder.textViewDesc.setText(listItem.getDesc());
+        //load the image from url to ImageView using Picasso
+        Picasso.get().load(listItem.getImageURL()).into(holder.profileImage);
 
     }
 
